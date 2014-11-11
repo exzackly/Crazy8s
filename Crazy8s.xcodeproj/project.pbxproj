@@ -13,6 +13,8 @@
 		B48589621A11CC7000E89D1F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B48589611A11CC7000E89D1F /* Images.xcassets */; };
 		B48589651A11CC7000E89D1F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B48589631A11CC7000E89D1F /* LaunchScreen.xib */; };
 		B48589711A11CC7000E89D1F /* Crazy8sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48589701A11CC7000E89D1F /* Crazy8sTests.swift */; };
+		B49D755A1A11CF2E001CE232 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49D75591A11CF2E001CE232 /* Card.swift */; };
+		B49D755C1A11D2EA001CE232 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49D755B1A11D2EA001CE232 /* Deck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		B485896A1A11CC7000E89D1F /* Crazy8sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Crazy8sTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B485896F1A11CC7000E89D1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B48589701A11CC7000E89D1F /* Crazy8sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crazy8sTests.swift; sourceTree = "<group>"; };
+		B49D75591A11CF2E001CE232 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		B49D755B1A11D2EA001CE232 /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				B485895C1A11CC7000E89D1F /* ViewController.swift */,
+				B49D75591A11CF2E001CE232 /* Card.swift */,
+				B49D755B1A11D2EA001CE232 /* Deck.swift */,
 				B485895E1A11CC7000E89D1F /* Main.storyboard */,
 				B48589611A11CC7000E89D1F /* Images.xcassets */,
 				B48589631A11CC7000E89D1F /* LaunchScreen.xib */,
@@ -212,7 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B49D755C1A11D2EA001CE232 /* Deck.swift in Sources */,
 				B485895D1A11CC7000E89D1F /* ViewController.swift in Sources */,
+				B49D755A1A11CF2E001CE232 /* Card.swift in Sources */,
 				B485895B1A11CC7000E89D1F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +415,7 @@
 				B48589761A11CC7000E89D1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B48589771A11CC7000E89D1F /* Build configuration list for PBXNativeTarget "Crazy8sTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +424,7 @@
 				B48589791A11CC7000E89D1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

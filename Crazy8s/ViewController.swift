@@ -12,8 +12,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("ok")
-        println("another change")
+        let newDeck = Deck()
+        println(newDeck)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
