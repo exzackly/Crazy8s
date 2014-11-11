@@ -15,6 +15,8 @@
 		B48589711A11CC7000E89D1F /* Crazy8sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48589701A11CC7000E89D1F /* Crazy8sTests.swift */; };
 		B49D755A1A11CF2E001CE232 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49D75591A11CF2E001CE232 /* Card.swift */; };
 		B49D755C1A11D2EA001CE232 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49D755B1A11D2EA001CE232 /* Deck.swift */; };
+		B49D755E1A11D6C2001CE232 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49D755D1A11D6C2001CE232 /* Player.swift */; };
+		B49D75601A11D739001CE232 /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49D755F1A11D739001CE232 /* Opponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		B48589701A11CC7000E89D1F /* Crazy8sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crazy8sTests.swift; sourceTree = "<group>"; };
 		B49D75591A11CF2E001CE232 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		B49D755B1A11D2EA001CE232 /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		B49D755D1A11D6C2001CE232 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		B49D755F1A11D739001CE232 /* Opponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				B485895C1A11CC7000E89D1F /* ViewController.swift */,
+				B49D755D1A11D6C2001CE232 /* Player.swift */,
+				B49D755F1A11D739001CE232 /* Opponent.swift */,
 				B49D75591A11CF2E001CE232 /* Card.swift */,
 				B49D755B1A11D2EA001CE232 /* Deck.swift */,
 				B485895E1A11CC7000E89D1F /* Main.storyboard */,
@@ -220,7 +226,9 @@
 			files = (
 				B49D755C1A11D2EA001CE232 /* Deck.swift in Sources */,
 				B485895D1A11CC7000E89D1F /* ViewController.swift in Sources */,
+				B49D75601A11D739001CE232 /* Opponent.swift in Sources */,
 				B49D755A1A11CF2E001CE232 /* Card.swift in Sources */,
+				B49D755E1A11D6C2001CE232 /* Player.swift in Sources */,
 				B485895B1A11CC7000E89D1F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

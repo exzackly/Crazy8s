@@ -8,20 +8,32 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol PPlayer {
+    var score: Int {get set}
+    var hand: [Card] {get set}
+}
 
+class ViewController: UIViewController {
+    let deck = Deck()
+    var players = [PPlayer]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let newDeck = Deck()
-        println(newDeck)
-        // Do any additional setup after loading the view, typically from a nib.
+        players.append(Player())
+        players.append(Opponent())
+        self.dealCards()
+        println(players[0])
+        println(players[1])
+        println(deck)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func dealCards() {
+        for var temp = 0; temp != 8; temp++ {
+            for var playerID = 0; playerID != players.count; playerID++ {
+                players[playerID].hand.append(deck.drawCard())
+            }
+        }
     }
-
-
+    
 }
 

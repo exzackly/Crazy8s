@@ -18,6 +18,11 @@ class Deck: NSObject, Printable {
             }
         }
     }
+    
+    func drawCard() -> Card {
+        return cards.removeAtIndex(0)
+    }
+    
     override var description: String {
         var returnString = "\(cards.count) Cards:\n"
         for card in cards {
