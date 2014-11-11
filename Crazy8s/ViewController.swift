@@ -15,23 +15,25 @@ protocol PPlayer {
 
 class ViewController: UIViewController {
     let deck = Deck()
-    var players = [PPlayer]()
+    var player = Player()
+    var opponent = Opponent()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        players.append(Player())
-        players.append(Opponent())
         self.dealCards()
-        println(players[0])
-        println(players[1])
+        println(player)
+        println(opponent)
         println(deck)
+    }
+    
+    func drawScreen() {
+        
     }
     
     func dealCards() {
         for var temp = 0; temp != 8; temp++ {
-            for var playerID = 0; playerID != players.count; playerID++ {
-                players[playerID].hand.append(deck.drawCard())
-            }
+            player.hand.append(deck.drawCard())
+            opponent.hand.append(deck.drawCard())
         }
     }
     

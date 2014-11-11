@@ -17,10 +17,20 @@ class Deck: NSObject, Printable {
                 cards.append(Card(rank: rankTemp, suit: suitTemp))
             }
         }
+        super.init()
+        self.shuffle()
     }
+
     
     func drawCard() -> Card {
         return cards.removeAtIndex(0)
+    }
+    
+    func shuffle() {
+        for var temp = 0; temp != cards.count; temp++ {
+            let tempInt = Int(arc4random()) % cards.count
+            (cards[temp], cards[tempInt]) = (cards[tempInt], cards[temp])
+        }
     }
     
     override var description: String {
@@ -34,4 +44,5 @@ class Deck: NSObject, Printable {
         }
         return returnString
     }
+
 }
