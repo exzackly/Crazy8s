@@ -21,9 +21,4 @@ class Player: NSObject, PPlayer, Printable {
         return returnString
     }
     
-    func playCard(opponent: Opponent) {
-        
-        opponent.playCard(self)
-    }
-    
 }

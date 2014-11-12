@@ -55,7 +55,8 @@ class ViewController: UIViewController {
         gestureRecognizer.view?.center = gestureRecognizer.locationInView(view)
         if gestureRecognizer.state == .Ended {
             if CGRectContainsPoint(deck.discards[0].frame, gestureRecognizer.locationInView(view)) {
-                if cardIsValid(gestureRecognizer.view as Card) {println("valid")}
+                if cardIsValid(gestureRecognizer.view as Card).isValid && cardIsValid(gestureRecognizer.view as Card).card.rank != 8 {opponent.playCard(deck); drawScreen()}
+                else if cardIsValid(gestureRecognizer.view as Card).isValid {chooseSuit()}
                 else {gestureRecognizer.view?.frame = (gestureRecognizer.view as Card).originalFrame}
             } else {
                 gestureRecognizer.view?.frame = (gestureRecognizer.view as Card).originalFrame
@@ -78,21 +79,21 @@ class ViewController: UIViewController {
     
     func chooseSuit() {
         let chooseSuitAlert = UIAlertController(title: "Choose Suit", message: nil, preferredStyle: .ActionSheet)
-        chooseSuitAlert.addAction(UIAlertAction(title: "♣ Clubs ♣", style: .Default, handler: {_ in self.deck.discards[0].text = "♣"}))
-        chooseSuitAlert.addAction(UIAlertAction(title: "♦ Diamonds ♦", style: .Default, handler: {_ in self.deck.discards[0].text = "♦"}))
-        chooseSuitAlert.addAction(UIAlertAction(title: "♥ Hearts ♥", style: .Default, handler: {_ in self.deck.discards[0].text = "♥"}))
-        chooseSuitAlert.addAction(UIAlertAction(title: "♠ Spades ♠", style: .Default, handler: {_ in self.deck.discards[0].text = "♠"}))
+        chooseSuitAlert.addAction(UIAlertAction(title: "♣ Clubs ♣", style: .Default, handler: {_ in self.deck.discards[0].text = "♣"; self.opponent.playCard(self.deck); self.drawScreen()}))
+        chooseSuitAlert.addAction(UIAlertAction(title: "♦ Diamonds ♦", style: .Default, handler: {_ in self.deck.discards[0].text = "♦"; self.opponent.playCard(self.deck); self.drawScreen()}))
+        chooseSuitAlert.addAction(UIAlertAction(title: "♥ Hearts ♥", style: .Default, handler: {_ in self.deck.discards[0].text = "♥"; self.opponent.playCard(self.deck); self.drawScreen()}))
+        chooseSuitAlert.addAction(UIAlertAction(title: "♠ Spades ♠", style: .Default, handler: {_ in self.deck.discards[0].text = "♠"; self.opponent.playCard(self.deck); self.drawScreen()}))
         presentViewController(chooseSuitAlert, animated: true, completion: nil)
     }
     
-    func cardIsValid(card: Card) -> Bool {
-        if card.rank == 8 {chooseSuit(); return true}
+    func cardIsValid(card: Card) -> (isValid: Bool, card: Card) {
+        if card.rank == 8 {return (true, card)}
         else if countElements(deck.discards[0].text!) == 1 {
-            if  "\(card.decodeSuit())" == deck.discards[0].text {return true}
-            else {return false}
+            if  "\(card.decodeSuit())" == deck.discards[0].text {return (true, card)}
+            else {return (true, card)}
         }
-        else if (card.rank == deck.discards[0].rank) || (card.suit == deck.discards[0].suit) {return true}
-        else {return false}
+        else if (card.rank == deck.discards[0].rank) || (card.suit == deck.discards[0].suit) {return (true, card)}
+        else {return (false, card)}
     }
     
 }
