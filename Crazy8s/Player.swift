@@ -11,7 +11,8 @@ import UIKit
 class Player: NSObject, PPlayer, Printable {
     var score = 0
     var hand = [Card]()
-    var cardButtons: [UIButton] = []
+    var cardButtons = [UIButton]()
+    
     override var description: String {
         var returnString = "Player: \(hand.count) cards\n"
         for card in hand {
@@ -19,9 +20,8 @@ class Player: NSObject, PPlayer, Printable {
         }
         return returnString
     }
+    
     func refreshButtons() {
-        cardButtons.removeAll()
-        cardButtons.append(UIButton())
     }
     
 }

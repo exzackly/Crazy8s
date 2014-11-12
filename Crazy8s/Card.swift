@@ -17,23 +17,21 @@ class Card: NSObject, Printable {
     }
     func decodeRank() -> String {
         if rank > 1 && rank < 11 {return "\(rank)"}
-        if rank == 1 {return "Ace"}
-        if rank == 11 {return "Jack"}
-        if rank == 12 {return "Queen"}
-        if rank == 13 {return "King"}
+        if rank == 1 {return "A"}
+        if rank == 11 {return "J"}
+        if rank == 12 {return "Q"}
+        if rank == 13 {return "K"}
         return "error"
     }
     func decodeSuit() -> String {
-        if suit == 1 {return "Clubs"}
-        if suit == 2 {return "Diamonds"}
-        if suit == 3 {return "Hearts"}
-        if suit == 4 {return "Spades"}
+        if suit == 1 {return "♣"}
+        if suit == 2 {return "♦"}
+        if suit == 3 {return "♥"}
+        if suit == 4 {return "♠"}
         return "error"
     }
     
     override var description: String {
-        var rankString = ""
-        var suitString = ""
-        return decodeRank() + " of " + decodeSuit()
+        return decodeRank() + decodeSuit()
     }
 }
