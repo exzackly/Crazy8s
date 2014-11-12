@@ -8,13 +8,25 @@
 
 import UIKit
 
-class Card: NSObject, Printable {
-    let suit: Int
-    let rank: Int
-    init(rank: Int, suit: Int) {
+class Card: UILabel, Printable {
+    let suit: Int!
+    let rank: Int!
+    var originalFrame: CGRect!
+    
+    init(frame: CGRect, rank: Int, suit: Int) {
         self.rank = rank
         self.suit = suit
+        super.init(frame: frame)
+        backgroundColor = UIColor.cyanColor()
+        text = "\(self)"
+        textAlignment = .Center
+        userInteractionEnabled = true
     }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     func decodeRank() -> String {
         if rank > 1 && rank < 11 {return "\(rank)"}
         if rank == 1 {return "A"}

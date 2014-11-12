@@ -21,7 +21,9 @@ class Player: NSObject, PPlayer, Printable {
         return returnString
     }
     
-    func refreshButtons() {
+    func playCard(opponent: Opponent) {
+        
+        opponent.playCard(self)
     }
     
 }

@@ -18,4 +18,8 @@ class Opponent: NSObject, PPlayer, Printable {
         }
         return returnString
     }
+    func playCard(player: Player) {
+        println("opponent taking turn")
+        //player.playCard(self)
+    }
 }
