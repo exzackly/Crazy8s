@@ -23,6 +23,18 @@ class ViewController: UIViewController {
         playGame()
     }
     
+    @IBAction func drawCard(sender: UIButton) {
+        for card in player.hand {
+            if cardIsValid(card).isValid {
+                let drawAlert = UIAlertController(title: "Cannot Draw Card", message: "There is a valid move to be made", preferredStyle: .Alert)
+                drawAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+                presentViewController(drawAlert, animated: true, completion: nil)
+                return
+            }
+        }
+        player.hand.append(deck.drawCard())
+        drawScreen()
+    }
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         drawScreen()
     }
@@ -55,8 +67,8 @@ class ViewController: UIViewController {
         gestureRecognizer.view?.center = gestureRecognizer.locationInView(view)
         if gestureRecognizer.state == .Ended {
             if CGRectContainsPoint(deck.discards[0].frame, gestureRecognizer.locationInView(view)) {
-                if cardIsValid(gestureRecognizer.view as Card).isValid && cardIsValid(gestureRecognizer.view as Card).card.rank != 8 {opponent.playCard(deck); drawScreen()}
-                else if cardIsValid(gestureRecognizer.view as Card).isValid {chooseSuit()}
+                if cardIsValid(gestureRecognizer.view as Card).isValid && cardIsValid(gestureRecognizer.view as Card).card.rank != 8 {deck.discardCard((gestureRecognizer.view as Card)); for (cardNum, cardTemp) in enumerate(player.hand) {if (gestureRecognizer.view as Card) == cardTemp {player.hand.removeAtIndex(cardNum)};}; (gestureRecognizer.view as Card).removeFromSuperview(); opponent.playCard(deck); drawScreen()}
+                else if cardIsValid(gestureRecognizer.view as Card).isValid {deck.discardCard((gestureRecognizer.view as Card)); for (cardNum, cardTemp) in enumerate(player.hand) {if (gestureRecognizer.view as Card) == cardTemp {player.hand.removeAtIndex(cardNum)};}; (gestureRecognizer.view as Card).removeFromSuperview(); chooseSuit()}
                 else {gestureRecognizer.view?.frame = (gestureRecognizer.view as Card).originalFrame}
             } else {
                 gestureRecognizer.view?.frame = (gestureRecognizer.view as Card).originalFrame
@@ -90,7 +102,7 @@ class ViewController: UIViewController {
         if card.rank == 8 {return (true, card)}
         else if countElements(deck.discards[0].text!) == 1 {
             if  "\(card.decodeSuit())" == deck.discards[0].text {return (true, card)}
-            else {return (true, card)}
+            else {return (false, card)}
         }
         else if (card.rank == deck.discards[0].rank) || (card.suit == deck.discards[0].suit) {return (true, card)}
         else {return (false, card)}
