@@ -14,9 +14,10 @@ protocol PPlayer {
 }
 
 class ViewController: UIViewController {
-    let deck = Deck()
+    var deck = Deck()
     var player = Player()
     var opponent = Opponent()
+    @IBOutlet weak var scoreLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,28 @@ class ViewController: UIViewController {
         drawScreen()
     }
     
+    func gameOver() {
+        for card in opponent.hand {
+            if card.rank == 8 {player.score += 50}
+            else if card.rank > 10 && card.rank < 14 {player.score += 10}
+            else {player.score += card.rank}
+        }
+        for card in player.hand {
+            if card.rank == 8 {opponent.score += 50}
+            else if card.rank > 10 && card.rank < 14 {opponent.score += 10}
+            else {opponent.score += card.rank}
+        }
+        deck = Deck()
+        for card in player.hand {card.removeFromSuperview()}
+        for card in opponent.hand {card.removeFromSuperview()}
+        player.hand.removeAll()
+        opponent.hand.removeAll()
+        opponent.gameIsOver = false
+        playGame()
+    }
+    
     func drawScreen() {
+        if opponent.gameIsOver || player.hand.count == 0 {gameOver();return}
         if !deck.discards.isEmpty {if deck.discards[0].superview != nil {deck.discards[0].removeFromSuperview()}}
         for card in player.hand {card.removeFromSuperview()}
         
@@ -85,6 +107,7 @@ class ViewController: UIViewController {
     }
     
     func playGame() {
+        scoreLabel.text = "Player : \(player.score) | Opponent : \(opponent.score)"
         dealCards()
         drawScreen()
     }

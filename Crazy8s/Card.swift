@@ -17,10 +17,12 @@ class Card: UILabel, Printable {
         self.rank = rank
         self.suit = suit
         super.init(frame: frame)
-        backgroundColor = UIColor.cyanColor()
+        backgroundColor = UIColor.whiteColor()
         text = "\(self)"
         textAlignment = .Center
         userInteractionEnabled = true
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
     }
 
     required init(coder aDecoder: NSCoder) {
