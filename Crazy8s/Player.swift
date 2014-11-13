@@ -10,8 +10,8 @@ import UIKit
 
 class Player: NSObject, PPlayer, Printable {
     var score = 0
-    var hand = [Card]()
-    var cardButtons = [UIButton]()
+    var hand: [Card] = []
+    var cardButtons: [UIButton] = []
     
     override var description: String {
         var returnString = "Player: \(hand.count) cards\n"
@@ -21,4 +21,7 @@ class Player: NSObject, PPlayer, Printable {
         return returnString
     }
     
+    func sortHand() {
+        hand.sort{$0.suit == $1.suit ? $0.rank < $1.rank : $0.suit < $1.suit}
+    }
 }

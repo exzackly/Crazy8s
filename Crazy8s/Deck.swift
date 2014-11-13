@@ -9,8 +9,8 @@
 import UIKit
 
 class Deck: NSObject, Printable {
-    var cards = [Card]()
-    var discards = [Card]()
+    var cards: [Card] = []
+    var discards: [Card] = []
     override init() {
         for var rankTemp = 1; rankTemp != 14; rankTemp++ {
             for var suitTemp = 1; suitTemp != 5; suitTemp++ {

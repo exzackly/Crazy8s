@@ -15,8 +15,8 @@ protocol PPlayer {
 
 class ViewController: UIViewController {
     var deck = Deck()
-    var player = Player()
-    var opponent = Opponent()
+    let player = Player()
+    let opponent = Opponent()
     @IBOutlet weak var scoreLabel: UILabel!
     
     override func viewDidLoad() {
@@ -51,6 +51,13 @@ class ViewController: UIViewController {
             else if card.rank > 10 && card.rank < 14 {opponent.score += 10}
             else {opponent.score += card.rank}
         }
+        let gameOverMessage = UIAlertController(title: "Game Over", message: "Player : \(player.score) | Opponent : \(opponent.score)", preferredStyle: .Alert)
+        gameOverMessage.addAction(UIAlertAction(title: "Next Round", style: .Default, handler: {_ in self.restartGame()}))
+        presentViewController(gameOverMessage, animated: true, completion: nil)
+    }
+    
+    func restartGame() {
+        deck.discards[0].removeFromSuperview()
         deck = Deck()
         for card in player.hand {card.removeFromSuperview()}
         for card in opponent.hand {card.removeFromSuperview()}
@@ -61,6 +68,8 @@ class ViewController: UIViewController {
     }
     
     func drawScreen() {
+        println(deck)
+        player.sortHand()
         if opponent.gameIsOver || player.hand.count == 0 {gameOver();return}
         if !deck.discards.isEmpty {if deck.discards[0].superview != nil {deck.discards[0].removeFromSuperview()}}
         for card in player.hand {card.removeFromSuperview()}
@@ -86,7 +95,8 @@ class ViewController: UIViewController {
     }
     
     func moveCard(gestureRecognizer: UIPanGestureRecognizer) {
-        gestureRecognizer.view?.center = gestureRecognizer.locationInView(view)
+        gestureRecognizer.view?.center = CGPoint(x: (gestureRecognizer.view?.center)!.x + gestureRecognizer.translationInView(gestureRecognizer.view!).x, y: (gestureRecognizer.view?.center)!.y + gestureRecognizer.translationInView(gestureRecognizer.view!).y)
+        gestureRecognizer.setTranslation(CGPointZero, inView: gestureRecognizer.view)
         if gestureRecognizer.state == .Ended {
             if CGRectContainsPoint(deck.discards[0].frame, gestureRecognizer.locationInView(view)) {
                 if cardIsValid(gestureRecognizer.view as Card).isValid && cardIsValid(gestureRecognizer.view as Card).card.rank != 8 {deck.discardCard((gestureRecognizer.view as Card)); for (cardNum, cardTemp) in enumerate(player.hand) {if (gestureRecognizer.view as Card) == cardTemp {player.hand.removeAtIndex(cardNum)};}; (gestureRecognizer.view as Card).removeFromSuperview(); opponent.playCard(deck); drawScreen()}
@@ -113,7 +123,10 @@ class ViewController: UIViewController {
     }
     
     func chooseSuit() {
+        if player.hand.count == 0 {drawScreen()}
         let chooseSuitAlert = UIAlertController(title: "Choose Suit", message: nil, preferredStyle: .ActionSheet)
+        chooseSuitAlert.popoverPresentationController?.sourceRect = deck.discards[0].frame
+        chooseSuitAlert.popoverPresentationController?.sourceView = view
         chooseSuitAlert.addAction(UIAlertAction(title: "♣ Clubs ♣", style: .Default, handler: {_ in self.deck.discards[0].text = "♣"; self.opponent.playCard(self.deck); self.drawScreen()}))
         chooseSuitAlert.addAction(UIAlertAction(title: "♦ Diamonds ♦", style: .Default, handler: {_ in self.deck.discards[0].text = "♦"; self.opponent.playCard(self.deck); self.drawScreen()}))
         chooseSuitAlert.addAction(UIAlertAction(title: "♥ Hearts ♥", style: .Default, handler: {_ in self.deck.discards[0].text = "♥"; self.opponent.playCard(self.deck); self.drawScreen()}))
